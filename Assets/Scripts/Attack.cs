@@ -33,7 +33,7 @@ public class Attack : MonoBehaviour
         currentTimeP2 += Time.deltaTime;
 
         //Debug.Log(currentTimeP2);
-        if(currentTimeP1 > cdBetweenAttacksP1)
+        if (currentTimeP1 > cdBetweenAttacksP1)
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
@@ -43,15 +43,19 @@ public class Attack : MonoBehaviour
             }
         }
 
-        if(currentTimeP2 > cdBetweenAttacksP2)
+        AttackP2();
+    }
+
+    private void AttackP2()
+    {
+        if (currentTimeP2 <= cdBetweenAttacksP2) return;
+
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                currentTimeP2 = 0;
-                animator2.Play(animationName);
-                Instantiate(windSlash, fp2.position, fp2.rotation);               
-            }
-        }       
+            currentTimeP2 = 0;
+            animator2.Play(animationName);
+            Instantiate(windSlash, fp2.position, fp2.rotation);
+        }
     }
 
     public void OnCollisionEnter(Collision collision)
