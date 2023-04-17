@@ -6,15 +6,20 @@ public class Player1Movement : MonoBehaviour
 {
     public GameObject player;
     float speed = 1;
-    void Start()
-    {
-        
-    }
-
+    private int lifes = 6;
 
     void Update()
     {
         PlayerMovement();
+        if (lifes <= 0)
+        {
+            Destroy(player);
+        }
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        lifes -= dmg;
     }
 
     void PlayerMovement()

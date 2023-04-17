@@ -6,16 +6,20 @@ public class Player2Movement : MonoBehaviour
 {
     public GameObject player;
     float speed = 1;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int lifes = 6;
 
-    // Update is called once per frame
     void Update()
     {
         PlayerMovement();
+        if (lifes <= 0)
+        {
+            Destroy(player);
+        }
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        lifes -= dmg;
     }
 
     void PlayerMovement()
