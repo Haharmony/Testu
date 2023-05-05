@@ -129,4 +129,52 @@ public class LinkedList : MonoBehaviour
             current = current.next;
         }
     }
+
+    public void Delete(Node data)
+    {
+        if(head == null)
+        {
+            return;
+        }
+
+        Node nodeToDelete = head;
+
+        while(nodeToDelete != null && nodeToDelete != data)
+        {
+            nodeToDelete = nodeToDelete.next;
+        }
+
+        if(nodeToDelete == head)
+        {
+            head = head.next;
+        }
+    }
+
+    public Node FindNode(int value)
+    {
+        Node nodeToFind = head;
+        while (nodeToFind != null)
+        {
+            if (value == nodeToFind.data)
+            {
+                return nodeToFind;
+            }
+
+            nodeToFind = nodeToFind.next;
+        }
+        return null;
+    }
+
+    public Node GetNodeValue(int index)
+    {
+        Node nodeValue = head;
+        int currentIndex = 0;
+        while (nodeValue != null && currentIndex < index)
+        {
+            nodeValue = nodeValue.next;
+            currentIndex++;
+        }
+
+        return nodeValue;
+    }
 }
