@@ -7,6 +7,8 @@ public class Manager : MonoBehaviour
 {
     LinkedList list = new LinkedList();
 
+    //The following methods are to interact with Canvas Buttons.
+
     public void AddDataAtLast()
     {
         list.AddLast(3);

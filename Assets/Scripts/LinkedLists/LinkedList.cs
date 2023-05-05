@@ -13,7 +13,7 @@ public class LinkedList : MonoBehaviour
         head = null;
     }
 
-    // Method to add the first node to the list.
+    // Method to add the first node of the list.
     public void AddFirstNode(int data)
     {
         Node firstNode = new Node(data);
@@ -61,14 +61,14 @@ public class LinkedList : MonoBehaviour
         }
         else
         {
-            // Traverse the list to find the last node.
+            // Run through the list to find the last node.
             Node lastNode = head;
             while (lastNode.next != null)
             {
                 lastNode = lastNode.next;
             }
 
-            // Append the new node to the end of the list.
+            // Add the new node to the end of the list.
             lastNode.next = newNode;
             newNode.prev = lastNode;
         }
@@ -119,6 +119,7 @@ public class LinkedList : MonoBehaviour
         }
     }
 
+    // Method to print the list stored data.
     public void PrintList()
     {
         Node current = head;
