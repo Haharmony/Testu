@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Player2Movement : MonoBehaviour
 {
     public GameObject player;
-    float speed = 1;
-    private int lifes = 6;
+    float speed = 2;
+    float lifes = 3;
+    public TextMeshProUGUI p2Lifes;
 
     void Update()
     {
         PlayerMovement();
-        if (lifes <= 0)
-        {
-            Destroy(player);
-        }
+        p2Lifes.text = lifes.ToString();
+
+        if (lifes > 0) return;
+        this.gameObject.SetActive(false);       
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         lifes -= dmg;
     }
@@ -44,6 +46,5 @@ public class Player2Movement : MonoBehaviour
             player.transform.position += Vector3.right * speed * Time.deltaTime;
             player.transform.rotation = Quaternion.LookRotation(Vector3.right);
         }
-
     }
 }

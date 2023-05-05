@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectiles : MonoBehaviour
 {
     private float speed = 5f;
-    int dmg = 1;
+    float dmg = 0.5f;
     public Rigidbody rb;
 
     void Update()
@@ -17,12 +17,13 @@ public class Projectiles : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "P1" || collision.tag == "LimitBorders")
-        {
+        { 
             Player1Movement p1 = collision.GetComponent<Player1Movement>();
             if (p1 != null)
             {
                 p1.TakeDamage(dmg);
             }
+            
             Destroy(gameObject);
         }
         if (collision.tag == "P2" || collision.tag == "LimitBorders")
