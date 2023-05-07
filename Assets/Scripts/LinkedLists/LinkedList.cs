@@ -130,24 +130,28 @@ public class LinkedList : MonoBehaviour
         }
     }
 
-    public void Delete(Node data)
+    public void DeleteNode(Node nodeToDelete)
     {
-        if(head == null)
+        if (head == null || nodeToDelete == null)
         {
             return;
         }
 
-        Node nodeToDelete = head;
-
-        while(nodeToDelete != null && nodeToDelete != data)
-        {
-            nodeToDelete = nodeToDelete.next;
-        }
-
-        if(nodeToDelete == head)
+        if (nodeToDelete == head)
         {
             head = head.next;
+            head.prev = null;
+            return;
         }
+
+        if (nodeToDelete.next == null)
+        {
+            nodeToDelete.prev.next = null;
+            return;
+        }
+
+        nodeToDelete.prev.next = nodeToDelete.next;
+        nodeToDelete.next.prev = nodeToDelete.prev;
     }
 
     public Node FindNode(int value)
