@@ -199,53 +199,6 @@ public class LoopList
         head = null;
     }
 
-    // Method to add a new node to the beginning of the list.
-    /*public void AddBeginning(int data)
-    {
-        Node newNode = new Node(data);
-
-        if (head == null)
-        {
-            // If the list is empty, make the new node the head.
-            head = newNode;
-        }
-        else
-        {
-            // Set the new node's next pointer to the current head.
-            newNode.next = head;
-
-            // Set the current head's prev pointer to the new node.
-            head.prev = newNode;
-
-            // Make the new node the new head of the list.
-            head = newNode;
-        }
-    }*/
-
-    // Method to add a new node to the end of the list.
-    /*public void AddLast(int data)
-    {
-        Node newNode = new Node(data);
-
-        if (head == null)
-        {
-            head = newNode;
-        }
-        else
-        {
-            // Run through the list to find the last node.
-            Node lastNode = head;
-            while (lastNode.next != null)
-            {
-                lastNode = lastNode.next;
-            }
-
-            // Add the new node to the end of the list.
-            lastNode.next = newNode;
-            newNode.prev = lastNode;
-        }
-    }*/
-
     // Method to add the first node of the list.
     public void AddFirstNode(int data)
     {
@@ -309,11 +262,31 @@ public class LoopList
             return;
         }
 
+        // If the list has only one node, delete it.
+        if (head == head.next)
+        {
+            head = null;
+            return;
+        }
+
+        // If we need to delete the head node, update head references.
         if (nodeToDelete == head)
         {
             head = head.next;
-            head.prev = null;
+            head.prev = head;
             return;
+        }
+        else
+        {
+            Node current = head;
+            while (current.next != nodeToDelete)
+            {
+                current = current.next;
+                if (current == head) // If we looped back to the head and didn't find the node, it's not in the list.
+                {
+                    return;
+                }
+            }
         }
 
         nodeToDelete.prev.next = nodeToDelete.next;
