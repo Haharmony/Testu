@@ -8,11 +8,7 @@ public class MainManager : MonoBehaviour
     void Start()
     {
         map.Generator();
+        map.BombsCounterTile();
         map.PrintBoard();
-    }
-
-    void Update()
-    {
-        
     }
 }

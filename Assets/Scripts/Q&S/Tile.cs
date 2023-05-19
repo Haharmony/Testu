@@ -13,6 +13,11 @@ public class Tile
     {
         this.isBomb = isBomb;
     }
+
+    public void BombCounterUp()
+    {
+        bombsAround++;
+    }
 }
 
 

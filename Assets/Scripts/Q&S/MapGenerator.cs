@@ -8,7 +8,9 @@ public class MapGenerator
     const int cols = 10;
     public Tile[,] board = new Tile[rows, cols];
     public int bombsNumber = 20;
+    public int bombsAround = 0;
     public string printSTR;
+    Stack<Tile> m_Stack = new Stack<Tile>();
     
     public void Generator()
     {
@@ -18,9 +20,7 @@ public class MapGenerator
             {
                 board[i, j] = new Tile(false);
             }
-        }
-
-        
+        }       
         int placedBombs = 0;
         while (placedBombs < bombsNumber)
         {
@@ -31,12 +31,47 @@ public class MapGenerator
             {
                 continue;
             }
-
             board[randRows, randCols] = new Tile(true);
             placedBombs++;
+        }        
+    }
+
+    public void BombsCounterTile()
+    {
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (board[i, j].isBomb != true)
+                {
+                    continue;
+                }
+                AddSurroundingNodes(i, j);
+
+                while(m_Stack.Count>0)
+                {
+                    m_Stack.Pop().BombCounterUp();
+                }
+            }
         }
     }
 
+    public void AddSurroundingNodes(int x, int y)
+    {
+        for(int i = x-1; i <= x+1; i++)
+        {
+            for(int j = y-1; j <= y+1; j++)
+            {
+                if (i < 0) continue;
+                if (i >= rows) continue;
+                if (j < 0) continue;
+                if (j >= cols) continue;
+                if (board[i, j].isBomb == true) continue;
+
+                m_Stack.Push(board[i, j]);
+            }
+        }
+    }
     public void PrintBoard()
     {
         int rows = board.GetLength(0);
@@ -52,7 +87,7 @@ public class MapGenerator
                 }
                 else
                 {
-                    printSTR += '0';
+                    printSTR += board[i,j].bombsAround;
                 }
                 printSTR += ',';
             }
@@ -61,3 +96,4 @@ public class MapGenerator
         Debug.Log(printSTR);
     }
 }
+
