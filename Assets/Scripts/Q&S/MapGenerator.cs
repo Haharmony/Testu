@@ -10,12 +10,11 @@ public class MapGenerator
     public int bombsNumber = 20;
     public string printSTR;
     
-
     public void Generator()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < cols; j++)
             {
                 board[i, j] = new Tile(false);
             }
@@ -23,19 +22,17 @@ public class MapGenerator
 
         
         int placedBombs = 0;
-        int randCols = Random.Range(0, cols);
-        int randRows = Random.Range(0, rows);
         while (placedBombs < bombsNumber)
         {
-            int row = randRows;
-            int col = randCols;
+            int randRows = Random.Range(0, rows);
+            int randCols = Random.Range(0, cols);
 
-            if (board[row, col].isBomb == true)
+            if (board[randRows, randCols].isBomb == true)
             {
                 continue;
             }
 
-            board[row, col] = new Tile(true);
+            board[randRows, randCols] = new Tile(true);
             placedBombs++;
         }
     }
@@ -49,7 +46,7 @@ public class MapGenerator
         {
             for(int j = 0; j < cols; j++)
             {
-                if (board[rows, cols].isBomb == true)
+                if (board[i, j].isBomb == true)
                 {
                     printSTR += 'B';
                 }

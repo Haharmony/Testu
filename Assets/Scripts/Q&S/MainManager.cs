@@ -7,6 +7,7 @@ public class MainManager : MonoBehaviour
     MapGenerator map = new MapGenerator();
     void Start()
     {
+        map.Generator();
         map.PrintBoard();
     }
 
