@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapGenerator
 {
@@ -11,6 +12,7 @@ public class MapGenerator
     public int bombsAround = 0;
     public string printSTR;
     Stack<Tile> m_Stack = new Stack<Tile>();
+    Queue<Tile> m_queue = new Queue<Tile>();
     
     public void Generator()
     {
@@ -33,7 +35,7 @@ public class MapGenerator
             }
             board[randRows, randCols] = new Tile(true);
             placedBombs++;
-        }        
+        }
     }
 
     public void BombsCounterTile()
@@ -72,28 +74,36 @@ public class MapGenerator
             }
         }
     }
-    public void PrintBoard()
+    public char[,] PrintBoard()
     {
         int rows = board.GetLength(0);
         int cols = board.GetLength(1);
 
-        for (int i = 0; i < rows; i++)
-        {
-            for(int j = 0; j < cols; j++)
-            {
-                if (board[i, j].isBomb == true)
-                {
-                    printSTR += 'B';
-                }
-                else
-                {
-                    printSTR += board[i,j].bombsAround;
-                }
-                printSTR += ',';
-            }
-            printSTR += '\n';
-        }
-        Debug.Log(printSTR);
+        char[,] s = new char[rows, cols];
+
+        return s;
+        //for (int i = 0; i < rows; i++)
+        //{
+        //    for(int j = 0; j < cols; j++)
+        //    {
+        //        if (board[i, j].isBomb == true)
+        //        {
+        //            printSTR += 'B';
+        //        }
+        //        else
+        //        {
+        //            printSTR += board[i,j].bombsAround;
+        //        }
+        //        printSTR += ',';
+        //    }
+        //    printSTR += '\n';
+        //}
+        //Debug.Log(printSTR);
+    }
+
+    public void DiscoverTile()
+    {
+
     }
 }
 
