@@ -12,7 +12,6 @@ public class MapGenerator
     public int bombsAround = 0;
     public string printSTR;
     Stack<Tile> m_Stack = new Stack<Tile>();
-    Queue<Tile> m_queue = new Queue<Tile>();
     
     public void Generator()
     {

@@ -8,6 +8,8 @@ public class Tile
     public bool isFlagged;
     public int bombsAround;
     public bool isBomb;
+    public int x;
+    public int y;
 
     public Tile(bool isBomb)
     {
