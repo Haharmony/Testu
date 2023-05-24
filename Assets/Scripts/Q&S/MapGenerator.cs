@@ -74,36 +74,28 @@ public class MapGenerator
             }
         }
     }
-    public char[,] PrintBoard()
+    public void PrintBoard()
     {
         int rows = board.GetLength(0);
         int cols = board.GetLength(1);
 
-        char[,] s = new char[rows, cols];
-
-        return s;
-        //for (int i = 0; i < rows; i++)
-        //{
-        //    for(int j = 0; j < cols; j++)
-        //    {
-        //        if (board[i, j].isBomb == true)
-        //        {
-        //            printSTR += 'B';
-        //        }
-        //        else
-        //        {
-        //            printSTR += board[i,j].bombsAround;
-        //        }
-        //        printSTR += ',';
-        //    }
-        //    printSTR += '\n';
-        //}
-        //Debug.Log(printSTR);
-    }
-
-    public void DiscoverTile()
-    {
-
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (board[i, j].isBomb == true)
+                {
+                    printSTR += 'B';
+                }
+                else
+                {
+                    printSTR += board[i, j].bombsAround;
+                }
+                printSTR += ',';
+            }
+            printSTR += '\n';
+        }
+        Debug.Log(printSTR);
     }
 }
 
