@@ -8,7 +8,7 @@ public class BoardManager : MonoBehaviour
 {
     const int rows = 10;
     const int cols = 10;
-    public int mines = 20;
+    public int mines;
     public Button cellButtonPrefab;
     MapGenerator mGenerator = new MapGenerator();
     public Tile[,] UIboard = new Tile[rows, cols];
@@ -16,8 +16,10 @@ public class BoardManager : MonoBehaviour
     private int flagsLeft = 20;
     Queue<Tile> m_queue = new Queue<Tile>();
 
+
     public void MapGenerator()
     {
+        mGenerator.bombsNumber = mines;
         mGenerator.Generator();
         mGenerator.BombsCounterTile();
         mGenerator.PrintBoard();
@@ -45,9 +47,14 @@ public class BoardManager : MonoBehaviour
                 int y = j;
                 Button cellButton = Instantiate(cellButtonPrefab, transform);
                 cellButton.onClick.AddListener(() => OnCellButtonClick(x, y));
-
+                cellButton.onClick.AddListener(() => GoThroughQueue());
             }
         }
+    }
+
+    public void FlagFunction(int row, int col)
+    {
+        UIboard[row, col].isFlagged = true;
     }
 
     private void OnCellButtonClick(int row, int col)
@@ -61,6 +68,7 @@ public class BoardManager : MonoBehaviour
             cellButton.interactable = false;
             cellButton.image.color = Color.red;
             Debug.Log("Game Over");
+
         }
         else if (UIboard[row, col].bombsAround == 0 && cellButton.interactable == true)
         {
@@ -82,7 +90,7 @@ public class BoardManager : MonoBehaviour
     private void QueueLogic(int row, int col)
     {
 
-        m_queue.Enqueue(UIboard[row, col]);
+        //m_queue.Enqueue(UIboard[row, col]);
 
         for (int i = row - 1; i <= row + 1; i++)
         {
@@ -93,9 +101,22 @@ public class BoardManager : MonoBehaviour
                 if (j < 0) continue;
                 if (j >= cols) continue;
                 if (UIboard[i, j].isBomb == true) continue;
+                if (UIboard[i, j].isFlagged == true) continue;
+                if (m_queue.Contains(UIboard[i, j])) continue;
 
-                OnCellButtonClick(i, j);
+
+                //OnCellButtonClick(i, j);
+                m_queue.Enqueue(UIboard[i, j]);
             }
+        }
+    }
+
+    void GoThroughQueue()
+    {
+        while (m_queue.Count > 0)
+        {
+            Tile temp = m_queue.Dequeue();
+            OnCellButtonClick(temp.x, temp.y);
         }
     }
 }

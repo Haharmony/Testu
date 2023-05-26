@@ -20,6 +20,8 @@ public class MapGenerator
             for (int j = 0; j < cols; j++)
             {
                 board[i, j] = new Tile(false);
+                board[i, j].x = i;
+                board[i, j].y = j;
             }
         }       
         int placedBombs = 0;
